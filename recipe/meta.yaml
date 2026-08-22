@@ -1,4 +1,5 @@
-{% set version = "1.18.0" %}
+{% set tests_to_skip = "_not_a_real_test" %}
+{% set version = "1.18.1" %}
 
 # Update the numpy value here to the most recent released version
 # when updating to a new scipy feature release; override default pins
@@ -13,8 +14,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/s/scipy/scipy-{{ version }}.tar.gz
-  sha256: 67b2ad2ad54c72ca6d04975a9b2df8c3638c34ddd5b28738e94fc2b57929d378
+  url: https://files.pythonhosted.org/packages/source/s/scipy/scipy-{{ version }}.tar.gz
+  sha256: 52c4b7422442aba924d03ad4019852b08a92e64ea187b933135687bfe2747307
 
 build:
   number: 0
@@ -56,10 +57,10 @@ requirements:
 # build-output.{sh,bat} installs the files
 outputs:
   - name: scipy
-    script: build-output.sh   # [not win]
+    script: build-output.sh  # [not win]
     script: build-output.bat  # [win]
     build:
-      ignore_run_exports:     # [win]
+      ignore_run_exports:   # [win]
         - libflang            # [win]
     requirements:
       build:
@@ -179,10 +180,10 @@ outputs:
         - python -c "import sys; lines=open('testlog').readlines(); sys.exit(0 if any('======== 1 failed' in x for x in lines) else 1)"
 
   - name: scipy-tests
-    script: build-output.sh   # [not win]
+    script: build-output.sh  # [not win]
     script: build-output.bat  # [win]
     build:
-      ignore_run_exports:     # [win]
+      ignore_run_exports:   # [win]
         - libflang            # [win]
     requirements:
       build:
